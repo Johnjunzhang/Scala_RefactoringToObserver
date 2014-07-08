@@ -1,0 +1,36 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-compiler:2.10.3'
+    compile 'org.scala-lang:scala-library:2.10.3'
+    testCompile "org.scalatest:scalatest_2.10:2.0.1-SNAP"
+    testCompile "junit:junit:4.11"
+}
+
+subprojects {
+    group = 'refactoringToObserverFacts'
+    version = '1.0.0'
+
+    apply plugin: 'scala'
+
+    sourceCompatibility = 1.7
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile 'org.scala-lang:scala-compiler:2.10.3'
+        compile 'org.scala-lang:scala-library:2.10.3'
+        testCompile "org.scalatest:scalatest_2.10:2.0.1-SNAP"
+        testCompile "junit:junit:4.11"
+    }
+}
