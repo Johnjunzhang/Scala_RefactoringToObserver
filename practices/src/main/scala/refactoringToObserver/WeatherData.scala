@@ -7,9 +7,13 @@ class WeatherData(seedingMachine: SeedingMachine, reapingMachine: ReapingMachine
   val seedingMachineObserver = new SeedingMachineObserver(seedingMachine)
   val wateringMachineObserver = new WateringMachineObserver(wateringMachine)
   val reapingMachineObserver = new ReapingMachineObserver(reapingMachine)
-  observers += seedingMachineObserver
-  observers += wateringMachineObserver
-  observers += reapingMachineObserver
+  subscribe(seedingMachineObserver)
+  subscribe(wateringMachineObserver)
+  subscribe(reapingMachineObserver)
+
+  def subscribe(observer: IObserver) = {
+    observers += observer
+  }
 
   def measurementsChanged(temp: Int, humidity: Int, windPower: Int):Unit = {
     observers.foreach(_.update(temp, humidity, windPower))
