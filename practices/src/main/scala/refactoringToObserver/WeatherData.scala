@@ -4,12 +4,9 @@ import scala.collection.mutable
 
 class WeatherData(seedingMachine: SeedingMachine, reapingMachine: ReapingMachine, wateringMachine: WateringMachine) {
   private val observers = mutable.MutableList[IObserver]()
-  val seedingMachineObserver = new SeedingMachineObserver(seedingMachine)
-  val wateringMachineObserver = new WateringMachineObserver(wateringMachine)
-  val reapingMachineObserver = new ReapingMachineObserver(reapingMachine)
-  subscribe(seedingMachineObserver)
-  subscribe(wateringMachineObserver)
-  subscribe(reapingMachineObserver)
+  subscribe(new SeedingMachineObserver(seedingMachine))
+  subscribe(new WateringMachineObserver(wateringMachine))
+  subscribe(new ReapingMachineObserver(reapingMachine))
 
   def subscribe(observer: IObserver) = {
     observers += observer
