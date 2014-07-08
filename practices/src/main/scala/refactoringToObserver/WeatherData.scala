@@ -2,24 +2,23 @@ package refactoringToObserver
 
 class WeatherData(seedingMachine: SeedingMachine, reapingMachine: ReapingMachine, wateringMachine: WateringMachine) {
   def measurementsChanged(temp: Int, humidity: Int, windPower: Int):Unit = {
-    seedingMachineUpdate(temp)
-    reapingMachineUpdate(temp, humidity)
+    seedingMachineUpdate(temp, humidity, windPower)
+    reapingMachineUpdate(temp, humidity, windPower)
     wateringMachineUpdate(temp, humidity, windPower)
   }
 
-
   def wateringMachineUpdate(temp: Int, humidity: Int, windPower: Int) {
     val wateringMachineObserver = new WateringMachineObserver(wateringMachine)
-    wateringMachineObserver.wateringMachineUpdate(temp, humidity, windPower)
+    wateringMachineObserver.update(temp, humidity, windPower)
   }
 
-  def reapingMachineUpdate(temp: Int, humidity: Int) {
+  def reapingMachineUpdate(temp: Int, humidity: Int, windPower:Int) {
     val reapingMachineObserver = new ReapingMachineObserver(reapingMachine)
-    reapingMachineObserver.reapingMachineUpdate(temp, humidity)
+    reapingMachineObserver.update(temp, humidity, windPower)
   }
 
-  def seedingMachineUpdate(temp: Int) {
+  def seedingMachineUpdate(temp: Int, humidity: Int, windPower:Int) {
     val seedingMachineObserver = new SeedingMachineObserver(seedingMachine)
-    seedingMachineObserver.seedingMachineUpdate(temp)
+    seedingMachineObserver.update(temp, humidity, windPower)
   }
 }
